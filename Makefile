@@ -22,6 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+CONFIG_DEBUGGER=y
+
 ifeq ($(shell uname -s),Darwin)
 CONFIG_DARWIN=y
 endif
@@ -148,6 +150,9 @@ ifeq ($(shell $(CC) -o /dev/null compat/test-closefrom.c 2>/dev/null && echo 1),
 DEFINES+=-DHAVE_CLOSEFROM
 endif
 endif
+ifdef CONFIG_DEBUGGER
+DEFINES+=-DWITH_DEBUGGER
+endif
 
 CFLAGS+=$(DEFINES)
 CFLAGS_DEBUG=$(CFLAGS) -O0
@@ -229,6 +234,9 @@ endif
 all: $(OBJDIR) $(OBJDIR)/quickjs.check.o $(OBJDIR)/qjs.check.o $(PROGS)
 
 QJS_LIB_OBJS=$(OBJDIR)/quickjs.o $(OBJDIR)/libregexp.o $(OBJDIR)/libunicode.o $(OBJDIR)/cutils.o $(OBJDIR)/quickjs-libc.o $(OBJDIR)/libbf.o
+ifdef CONFIG_DEBUGGER
+QJS_LIB_OBJS+=$(OBJDIR)/quickjs-debugger.o $(OBJDIR)/quickjs-debugger-transport.o
+endif
 
 QJS_OBJS=$(OBJDIR)/qjs.o $(OBJDIR)/repl.o $(QJS_LIB_OBJS)
 ifdef CONFIG_BIGNUM
