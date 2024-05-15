@@ -10,7 +10,8 @@
             "request": "launch",
             "runtimeExecutable": "${workspaceFolder}/qjs",
             "cwd": "${workspaceFolder}",
-            "program": "${file}"
+            "program": "${file}",
+            "preLaunchTask": "make qjs"
         },
         {
             "name": "cc:qjs",
@@ -25,7 +26,7 @@
             "externalConsole": false,
             "MIMode": "lldb",
             "targetArchitecture": "arm",
-            "preLaunchTask": "make"
+            "preLaunchTask": "make qjs"
         },
     ]
 }

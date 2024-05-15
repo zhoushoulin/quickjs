@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "make",
+            "label": "make qjs",
             "type": "shell",
-            "command": "make",
+            "command": "make qjs",
             "group": {
                 "kind": "build",
                 "isDefault": true
